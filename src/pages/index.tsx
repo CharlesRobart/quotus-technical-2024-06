@@ -42,6 +42,7 @@ import { useTableConfig } from "@hooks/useKpiTableConfig";
 import { useKpiByFormatBarChart } from "@/hooks/useKpiByFormatBarChart";
 import { useKpiByFormatAndFirstWordLineChart } from "@/hooks/useKpiByFormatAndFirstWordLineChart";
 import { Link } from "@chakra-ui/next-js";
+import SideNav from "@/components/SideNav";
 
 Chart.register(
   LineElement,
@@ -129,20 +130,12 @@ const Home = () => {
   return (
     <Box display="flex" height="100vh">
       {/* Sidenav */}
-      <Box
-        width={sidenavWidth}
-        transition={sidenavTransition}
-        overflow="hidden"
-      >
-        <Box p="4" bg="gray.100" height="100%">
-          <Heading size="md" mb="4">
-            Menu
-          </Heading>
-          <VStack align="start">
-            <Link href="/">Dashboard</Link>
-          </VStack>
-        </Box>
-      </Box>
+      <SideNav
+        isOpen={isOpen}
+        onToggle={onToggle}
+        sidenavWidth={sidenavWidth}
+        sidenavTransition={sidenavTransition}
+      />
 
       {/* Main Content */}
       <Box flex="1" p="4">
