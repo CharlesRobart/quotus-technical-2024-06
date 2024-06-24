@@ -1,30 +1,14 @@
 import {
   Box,
-  Heading,
-  Text,
-  TableContainer,
-  Table,
-  Th,
-  Td,
-  Thead,
-  Tbody,
-  Tr,
-  VStack,
   useDisclosure,
-  HStack,
-  IconButton,
 } from "@chakra-ui/react";
-import NoSSR from "react-no-ssr";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
 import type { Dealership, Kpi, KpiData, Option } from "@/typescript/interfaces";
 import type { KpiManagerResponse } from "@pages/api/kpi-manager";
-import Select from "react-select";
 import {
   getReactSelectOptionsFromDealerships,
   getReactSelectOptionsFromKpis,
 } from "@utils/helper";
-import { getReactSelectOptionsFromGroupedKpis } from "@utils/helper";
 import {
   Chart,
   LineElement,
@@ -37,13 +21,18 @@ import {
   BarElement,
   Filler,
 } from "chart.js";
-import { Line, Bar } from "react-chartjs-2";
 import { useTableConfig } from "@hooks/useKpiTableConfig";
 import { useKpiByFormatBarChart } from "@/hooks/useKpiByFormatBarChart";
 import { useKpiByFormatAndFirstWordLineChart } from "@/hooks/useKpiByFormatAndFirstWordLineChart";
-import { Link } from "@chakra-ui/next-js";
 import SideNav from "@/components/SideNav";
 import MainContent from "@/components/MainContent";
+import DealershipSelector from "@/components/DealershipSelector";
+import KpiSelector from "@/components/KpiSelector";
+import KpiTable from "@/components/KpiTable";
+import KpiGroupByFormatSelector from "@/components/KpiGroupByFormatSelector";
+import KpiBarChart from "@/components/KpiBarChart";
+import KpiGroupByFormatAndFirstWordSelector from "@/components/KpiGroupByFormatAndFirstWordSelector";
+import KpiLineChart from "@/components/KpiLineChart";
 
 Chart.register(
   LineElement,
@@ -144,136 +133,56 @@ const Home = () => {
 
         {/* Dealership Selector */}
 
-          <NoSSR>
-            <Select
-              isMulti
-              isClearable
-              options={getReactSelectOptionsFromDealerships(dealerships)}
-              onChange={(selectedOptions) => {
-                setSelectedDealerships(selectedOptions as Option[]);
-              }}
-              value={selectedDealerships}
-              placeholder="First select at leasr one dealership"
-              id="dealership-selector"
-            />
-          </NoSSR>
+          <DealershipSelector
+            dealerships={getReactSelectOptionsFromDealerships(dealerships)}
+            selectedDealerships={selectedDealerships}
+            setSelectedDealerships={setSelectedDealerships}
+          />
 
           {/* KPI Selector */}
           {selectedDealerships.length > 0 && (
             <>
-              <NoSSR>
-                <Select
-                  isMulti
-                  isClearable
-                  options={getReactSelectOptionsFromKpis(kpis)}
-                  onChange={(selectedOptions) => {
-                    setSelectedKpis(selectedOptions as Option[]);
-                  }}
-                  value={selectedKpis}
-                  placeholder="Then you can Select KPIs for the table"
-                />
-              </NoSSR>
+              <KpiSelector
+              kpis={getReactSelectOptionsFromKpis(kpis)}
+              selectedKpis={selectedKpis}
+              setSelectedKpis={setSelectedKpis}
+              />
               {/* Kpi Table */}
-              <TableContainer>
-                <Table {...getTableProps()}>
-                  <Thead>
-                    {headerGroups.map((headerGroup, index) => (
-                      <Tr
-                        {...headerGroup.getHeaderGroupProps()}
-                        key={`${headerGroup.id}-${index}`}
-                      >
-                        {headerGroup.headers.map((column) => (
-                          <Th {...column.getHeaderProps()} key={column.id}>
-                            {column.render("Header")}
-                          </Th>
-                        ))}
-                      </Tr>
-                    ))}
-                  </Thead>
-                  <Tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
-                      prepareRow(row);
-                      return (
-                        <Tr {...row.getRowProps()} key={row.id}>
-                          {row.cells.map((cell) => (
-                            <Td {...cell.getCellProps()} key={cell.column.id}>
-                              {cell.render("Cell")}
-                            </Td>
-                          ))}
-                        </Tr>
-                      );
-                    })}
-                  </Tbody>
-                </Table>
-              </TableContainer>
+              <KpiTable
+              getTableProps={getTableProps}
+              getTableBodyProps={getTableBodyProps}
+              headerGroups={headerGroups}
+              rows={rows}
+              prepareRow={prepareRow}
+              />
 
               {/* Kpi Group by format Selector */}
-              <NoSSR>
-                <Select
-                  options={getReactSelectOptionsFromGroupedKpis(groupedByFormat)}
-                  onChange={(selectedOption) => {
-                    setSelectedKpiFormatGroup(selectedOption as Option);
-                  }}
-                  placeholder="Select Kpi By Format Group for the Bar Chart"
-                  value={selectedKpiFormatGroup}
-                  id="kpi-by-format-group"
-                />
-              </NoSSR>
+              <KpiGroupByFormatSelector
+                groupedByFormat={groupedByFormat}
+                selectedKpiFormatGroup={selectedKpiFormatGroup}
+                setSelectedKpiFormatGroup={setSelectedKpiFormatGroup}
+              />
 
               {/* Bar Chart */}
-              <Box
-                h="300px"
-                w={`calc(100vw - ${sidenavWidth})`}
-                transition={sidenavTransition}
-              >
-                <Bar
-                  data={barChartData}
-                  options={{
-                    maintainAspectRatio: false,
-                    scales: {
-                      y: {
-                        beginAtZero: true,
-                      },
-                    },
-                  }}
-                />
-              </Box>
+              <KpiBarChart
+              barChartData={barChartData}
+              sidenavWidth={sidenavWidth}
+              sidenavTransition={sidenavTransition}
+              />
 
               {/* Kpi by format and first word selector */}
-              <NoSSR>
-                <Select
-                  options={getReactSelectOptionsFromGroupedKpis(
-                    groupedByFormatAndFirstWord,
-                  )}
-                  onChange={(selectedOption) => {
-                    setSelectedKpiFormatAndFirstWordGroup(
-                      selectedOption as Option,
-                    );
-                  }}
-                  placeholder="Select Kpi By Format And First Word Group (Its just a way to classify I know its weird) for the line chart"
-                  value={selectedKpiFormatAndFirstWordGroup}
-                  id="kpi-by-format-and-first-word-group"
-                />
-              </NoSSR>
+              <KpiGroupByFormatAndFirstWordSelector
+                groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
+                selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
+                setSelectedKpiFormatAndFirstWordGroup={setSelectedKpiFormatAndFirstWordGroup}
+              />
 
               {/* Line Chart */}
-              <Box
-                h="300px"
-                w={`calc(100vw - ${sidenavWidth})`}
-                transition={sidenavTransition}
-              >
-                <Line
-                  data={lineChartData}
-                  options={{
-                    maintainAspectRatio: false,
-                    scales: {
-                      y: {
-                        beginAtZero: true,
-                      },
-                    },
-                  }}
-                />
-              </Box>
+              <KpiLineChart
+              lineChartData={lineChartData}
+              sidenavWidth={sidenavWidth}
+              sidenavTransition={sidenavTransition}
+              />
             </>
           )}
         </MainContent>
