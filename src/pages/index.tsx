@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -142,6 +143,44 @@ const Home = () => {
           {/* KPI Selector */}
           {selectedDealerships.length > 0 && (
             <>
+              
+              
+                <Flex w="auto" mb={4} gap="10px">
+                
+                  {/* Kpi Group by format Selector */}
+                  <Flex direction="column" flex="1">
+                    <KpiGroupByFormatSelector
+                      groupedByFormat={groupedByFormat}
+                      selectedKpiFormatGroup={selectedKpiFormatGroup}
+                      setSelectedKpiFormatGroup={setSelectedKpiFormatGroup}
+                    />
+
+                    {/* Bar Chart */}
+                    <KpiBarChart
+                    barChartData={barChartData}
+                    sidenavWidth={sidenavWidth}
+                    sidenavTransition={sidenavTransition}
+                    />
+                  </Flex>
+
+                  {/* Kpi by format and first word selector */}
+                  <Flex direction="column" flex="1">
+                    <KpiGroupByFormatAndFirstWordSelector
+                      groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
+                      selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
+                      setSelectedKpiFormatAndFirstWordGroup={setSelectedKpiFormatAndFirstWordGroup}
+                    />
+
+                    {/* Line Chart */}
+                    <KpiLineChart
+                    lineChartData={lineChartData}
+                    sidenavWidth={sidenavWidth}
+                    sidenavTransition={sidenavTransition}
+                    />
+                  </Flex>
+                </Flex>
+            
+
               <KpiSelector
               kpis={getReactSelectOptionsFromKpis(kpis)}
               selectedKpis={selectedKpis}
@@ -156,33 +195,6 @@ const Home = () => {
               prepareRow={prepareRow}
               />
 
-              {/* Kpi Group by format Selector */}
-              <KpiGroupByFormatSelector
-                groupedByFormat={groupedByFormat}
-                selectedKpiFormatGroup={selectedKpiFormatGroup}
-                setSelectedKpiFormatGroup={setSelectedKpiFormatGroup}
-              />
-
-              {/* Bar Chart */}
-              <KpiBarChart
-              barChartData={barChartData}
-              sidenavWidth={sidenavWidth}
-              sidenavTransition={sidenavTransition}
-              />
-
-              {/* Kpi by format and first word selector */}
-              <KpiGroupByFormatAndFirstWordSelector
-                groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
-                selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
-                setSelectedKpiFormatAndFirstWordGroup={setSelectedKpiFormatAndFirstWordGroup}
-              />
-
-              {/* Line Chart */}
-              <KpiLineChart
-              lineChartData={lineChartData}
-              sidenavWidth={sidenavWidth}
-              sidenavTransition={sidenavTransition}
-              />
             </>
           )}
         </MainContent>
