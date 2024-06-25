@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Bar } from "react-chartjs-2";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface KpiBarChartProps {
   barChartData: any;
@@ -9,29 +9,29 @@ interface KpiBarChartProps {
 }
 
 const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarChartProps) => {
-
-  const chartRef = useRef(null);
+  
+  const [chartKey, setChartKey] = useState(0);
 
   useEffect(() => {
-    if (chartRef.current && (chartRef.current as any).chartInstance) {
-      (chartRef.current as any).chartInstance.resize();
-    }
+    // Ceci force le re-rendu du graphique en changeant sa clé lorsque la sidenav change
+    setChartKey(prevKey => prevKey + 1);
   }, [sidenavWidth, sidenavTransition]);
 
   return (
-  <Box h="300px" w={`calc(100vw - ${sidenavWidth})`} transition={sidenavTransition}>
-    <Bar
-      data={barChartData}
-      options={{
-        maintainAspectRatio: false,
-        scales: {
-          y: {
-            beginAtZero: true,
+    <Box  display="flex" w="100%">
+      <Bar
+        key={chartKey}
+        data={barChartData}
+        options={{
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
           },
-        },
-      }}
-    />
-  </Box>
+        }}
+      />
+    </Box>
   );
 };
 

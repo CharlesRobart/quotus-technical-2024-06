@@ -23,7 +23,7 @@ const KpiGroupByFormatAndFirstWordSelector: React.FC<KpiGroupByFormatAndFirstWor
         onChange={(selectedOption) => {
           setSelectedKpiFormatAndFirstWordGroup(selectedOption as Option);
         }}
-        placeholder="Select Kpi By Format And First Word Group (Its just a way to classify I know its weird) for the line chart"
+        placeholder="Select Kpi By Format And First Word Group "
         value={selectedKpiFormatAndFirstWordGroup}
         id="kpi-by-format-and-first-word-group"
       />

@@ -145,10 +145,10 @@ const Home = () => {
             <>
               
               
-                <Flex w="auto" mb={4} gap="10px">
+                <Flex w={`calc(100vw - ${sidenavWidth})`} transition={sidenavTransition} mb={4} gap="10px" border="2px solid black">
                 
                   {/* Kpi Group by format Selector */}
-                  <Flex direction="column" flex="1">
+                  <Flex direction="column" flex="1" p="10px" >
                     <KpiGroupByFormatSelector
                       groupedByFormat={groupedByFormat}
                       selectedKpiFormatGroup={selectedKpiFormatGroup}
@@ -164,7 +164,7 @@ const Home = () => {
                   </Flex>
 
                   {/* Kpi by format and first word selector */}
-                  <Flex direction="column" flex="1">
+                  <Flex direction="column" flex="1" p="10px">
                     <KpiGroupByFormatAndFirstWordSelector
                       groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
                       selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
@@ -172,7 +172,7 @@ const Home = () => {
                     />
 
                     {/* Line Chart */}
-                    <KpiLineChart
+                    <KpiLineChart 
                     lineChartData={lineChartData}
                     sidenavWidth={sidenavWidth}
                     sidenavTransition={sidenavTransition}
