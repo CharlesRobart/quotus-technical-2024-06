@@ -1,5 +1,5 @@
-// components/KpiGroupByFormatSelector.tsx
 import React from 'react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
 import NoSSR from 'react-no-ssr';
 import Select from 'react-select';
 import type { Option } from "@/typescript/interfaces";
@@ -16,18 +16,21 @@ const KpiGroupByFormatSelector: React.FC<KpiGroupByFormatSelectorProps> = ({
   selectedKpiFormatGroup,
   setSelectedKpiFormatGroup,
 }) => {
+  const options = getReactSelectOptionsFromGroupedKpis(groupedByFormat);
+
   return (
-    <NoSSR>
-      <Select
-        options={getReactSelectOptionsFromGroupedKpis(groupedByFormat)}
-        onChange={(selectedOption) => {
-          setSelectedKpiFormatGroup(selectedOption as Option);
-        }}
-        placeholder="Select Kpi By Format Group for the Bar Chart"
-        value={selectedKpiFormatGroup}
-        id="kpi-by-format-group"
-      />
-    </NoSSR>
+    <ButtonGroup display="flex" justifyContent="center">
+      {options.map((option) => (
+        <Button
+          key={option.value}
+          onClick={() => setSelectedKpiFormatGroup(option)}
+          colorScheme={selectedKpiFormatGroup?.value === option.value ? 'blue' : 'gray'}
+        >
+          {option.label}
+        </Button>
+      ))}
+    </ButtonGroup>
+    
   );
 };
 
