@@ -18,7 +18,7 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
   }, [sidenavWidth, sidenavTransition]);
 
   return (
-    <Box  display="flex" w="100%">
+    <Box  display="flex" w="100%" h="300px">
       <Bar
         key={chartKey}
         data={barChartData}
@@ -27,6 +27,13 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
           scales: {
             y: {
               beginAtZero: true,
+            },
+            x: { // Ajoutez cette section pour configurer l'axe des abscisses
+              ticks: {
+                font: {
+                  size: 8, // Définissez la taille de la police souhaitée ici
+                },
+              },
             },
           },
         }}

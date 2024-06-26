@@ -11,7 +11,7 @@ interface DealershipSelectorProps {
 
 const DealershipSelector = ({ dealerships, selectedDealerships, setSelectedDealerships }: DealershipSelectorProps) => (
   <Box display="flex" justifyContent="center" alignItems="center" w="100%" h="100%" >
-    <Box display="flex" justifyContent="center" alignItems="center" w="auto" p="10px" my="10px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
+    <Box display="flex" justifyContent="center" alignItems="center" w="auto" p="10px">
       <NoSSR>
         <Select
           isMulti
@@ -21,6 +21,18 @@ const DealershipSelector = ({ dealerships, selectedDealerships, setSelectedDeale
           value={selectedDealerships}
           placeholder="First select at least one dealership"
           id="dealership-selector"
+          styles={{
+            control: (provided) => ({
+              ...provided,
+              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)",
+              borderColor: '#E2E2E2',
+              borderRadius: '10px',
+              transition: 'transform 0.3s ease',
+              '&:hover': {
+                transform: 'scale(1.05)',
+              },
+            }),
+          }}
         />
       </NoSSR>
     </Box>

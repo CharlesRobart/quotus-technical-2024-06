@@ -17,7 +17,7 @@ const KpiLineChart = ({ lineChartData, sidenavWidth, sidenavTransition }: KpiLin
   }, [sidenavWidth, sidenavTransition]);
 
   return (
-    <Box  display="flex" w="100%">
+    <Box  display="flex" w="100%" h="300px">
       <Line
         key={chartKey}
         data={lineChartData}

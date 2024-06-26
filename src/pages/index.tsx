@@ -129,75 +129,77 @@ const Home = () => {
       />
 
       {/* Main Content */}
-      <Box flex="1" p="4" >
-        <MainContent isOpen={isOpen} onToggle={onToggle}>
+      <Box flex="1" >
+        <MainContent 
+          isOpen={isOpen} 
+          onToggle={onToggle}
+          dealerships={getReactSelectOptionsFromDealerships(dealerships)}
+          selectedDealerships={selectedDealerships}
+          setSelectedDealerships={setSelectedDealerships}
+          >
 
         {/* Dealership Selector */}
 
-          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%" backgroundColor="#F9F9F9" boxShadow="inset 0 0 10px #E2E2E2">
-          <DealershipSelector
-            dealerships={getReactSelectOptionsFromDealerships(dealerships)}
-            selectedDealerships={selectedDealerships}
-            setSelectedDealerships={setSelectedDealerships}
-          />
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%" p="5px" backgroundColor="#F9F9F9" boxShadow="inset 0 0 10px #E2E2E2">
 
-          {/* KPI Selector */}
-          {selectedDealerships.length > 0 && (
-            <>
-              
-              
-                <Flex w={`calc(100vw - ${sidenavWidth})`} transition={sidenavTransition} mb={4} gap="10px" border="2px solid black">
+            {/* KPI Selector */}
+            {selectedDealerships.length > 0 && (
+              <>
                 
-                  {/* Kpi Group by format Selector */}
-                  <Flex direction="column" flex="1" p="10px" >
-                    <KpiGroupByFormatSelector
-                      groupedByFormat={groupedByFormat}
-                      selectedKpiFormatGroup={selectedKpiFormatGroup}
-                      setSelectedKpiFormatGroup={setSelectedKpiFormatGroup}
-                    />
+                  <Flex w="{`calc(100vw - ${sidenavWidth})`}" transition={sidenavTransition} mb={4} gap="10px" flexWrap="wrap">
+                  
+                    {/* Kpi Group by format Selector */}
+                    <Flex direction="column" flex="1" p="10px" maxWidth="900px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)" >
+                      <KpiGroupByFormatSelector
+                        groupedByFormat={groupedByFormat}
+                        selectedKpiFormatGroup={selectedKpiFormatGroup}
+                        setSelectedKpiFormatGroup={setSelectedKpiFormatGroup}
+                      />
 
-                    {/* Bar Chart */}
-                    <KpiBarChart
-                    barChartData={barChartData}
-                    sidenavWidth={sidenavWidth}
-                    sidenavTransition={sidenavTransition}
-                    />
+                      {/* Bar Chart */}
+                      <KpiBarChart
+                      barChartData={barChartData}
+                      sidenavWidth={sidenavWidth}
+                      sidenavTransition={sidenavTransition}
+                      />
+                    </Flex>
+
+                    {/* Kpi by format and first word selector */}
+                    <Flex direction="column" flex="1" p="10px" maxWidth="900px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
+                      <KpiGroupByFormatAndFirstWordSelector
+                        groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
+                        selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
+                        setSelectedKpiFormatAndFirstWordGroup={setSelectedKpiFormatAndFirstWordGroup}
+                      />
+
+                      {/* Line Chart */}
+                      <KpiLineChart 
+                      lineChartData={lineChartData}
+                      sidenavWidth={sidenavWidth}
+                      sidenavTransition={sidenavTransition}
+                      />
+                    </Flex>
                   </Flex>
 
-                  {/* Kpi by format and first word selector */}
-                  <Flex direction="column" flex="1" p="10px">
-                    <KpiGroupByFormatAndFirstWordSelector
-                      groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
-                      selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
-                      setSelectedKpiFormatAndFirstWordGroup={setSelectedKpiFormatAndFirstWordGroup}
-                    />
+                <Box display="flex" flexDirection="column" p="10px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
+                  {/* Kpi Selector */}
+                  <KpiSelector
+                  kpis={getReactSelectOptionsFromKpis(kpis)}
+                  selectedKpis={selectedKpis}
+                  setSelectedKpis={setSelectedKpis}
+                  />
+                  {/* Kpi Table */}
+                  <KpiTable
+                  getTableProps={getTableProps}
+                  getTableBodyProps={getTableBodyProps}
+                  headerGroups={headerGroups}
+                  rows={rows}
+                  prepareRow={prepareRow}
+                  />
+                </Box>
 
-                    {/* Line Chart */}
-                    <KpiLineChart 
-                    lineChartData={lineChartData}
-                    sidenavWidth={sidenavWidth}
-                    sidenavTransition={sidenavTransition}
-                    />
-                  </Flex>
-                </Flex>
-            
-
-              <KpiSelector
-              kpis={getReactSelectOptionsFromKpis(kpis)}
-              selectedKpis={selectedKpis}
-              setSelectedKpis={setSelectedKpis}
-              />
-              {/* Kpi Table */}
-              <KpiTable
-              getTableProps={getTableProps}
-              getTableBodyProps={getTableBodyProps}
-              headerGroups={headerGroups}
-              rows={rows}
-              prepareRow={prepareRow}
-              />
-
-            </>
-          )}
+              </>
+            )}
           </Box>
         </MainContent>
       </Box>
