@@ -27,7 +27,6 @@ import { useKpiByFormatBarChart } from "@/hooks/useKpiByFormatBarChart";
 import { useKpiByFormatAndFirstWordLineChart } from "@/hooks/useKpiByFormatAndFirstWordLineChart";
 import SideNav from "@/components/SideNav";
 import MainContent from "@/components/MainContent";
-import DealershipSelector from "@/components/DealershipSelector";
 import KpiSelector from "@/components/KpiSelector";
 import KpiTable from "@/components/KpiTable";
 import KpiGroupByFormatSelector from "@/components/KpiGroupByFormatSelector";
@@ -144,12 +143,12 @@ const Home = () => {
 
             {/* KPI Selector */}
             {selectedDealerships.length > 0 && (
-              <>
+              <Box w="{`calc(100vw - ${sidenavWidth})`}" transition={sidenavTransition}>
                 
                   <Flex w="{`calc(100vw - ${sidenavWidth})`}" transition={sidenavTransition} mb={4} gap="10px" flexWrap="wrap">
                   
                     {/* Kpi Group by format Selector */}
-                    <Flex direction="column" flex="1" p="10px" maxWidth="900px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)" >
+                    <Flex direction="column" flex="1" p="10px"  maxWidth="auto" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)" >
                       <KpiGroupByFormatSelector
                         groupedByFormat={groupedByFormat}
                         selectedKpiFormatGroup={selectedKpiFormatGroup}
@@ -165,7 +164,7 @@ const Home = () => {
                     </Flex>
 
                     {/* Kpi by format and first word selector */}
-                    <Flex direction="column" flex="1" p="10px" maxWidth="900px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
+                    <Flex direction="column" flex="1" p="10px"  maxWidth="auto" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
                       <KpiGroupByFormatAndFirstWordSelector
                         groupedByFormatAndFirstWord={groupedByFormatAndFirstWord}
                         selectedKpiFormatAndFirstWordGroup={selectedKpiFormatAndFirstWordGroup}
@@ -181,7 +180,7 @@ const Home = () => {
                     </Flex>
                   </Flex>
 
-                <Box display="flex" flexDirection="column" p="10px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
+                <Box display="flex" flexDirection="column"  w="{`calc(100vw - ${sidenavWidth})`}" p="10px" backgroundColor="white" border="1px solid #E2E2E2" borderRadius="10" boxShadow="2px 2px 5px rgba(0, 0, 0, 0.1)">
                   {/* Kpi Selector */}
                   <KpiSelector
                   kpis={getReactSelectOptionsFromKpis(kpis)}
@@ -198,7 +197,7 @@ const Home = () => {
                   />
                 </Box>
 
-              </>
+              </Box>
             )}
           </Box>
         </MainContent>

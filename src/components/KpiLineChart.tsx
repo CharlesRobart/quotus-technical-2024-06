@@ -28,6 +28,15 @@ const KpiLineChart = ({ lineChartData, sidenavWidth, sidenavTransition }: KpiLin
               beginAtZero: true,
             },
           },
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                  size: 8, // Taille de la police de la légende
+                },
+              },
+            },
+          },
         }}
       />
     </Box>

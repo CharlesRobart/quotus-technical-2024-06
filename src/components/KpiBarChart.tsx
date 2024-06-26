@@ -24,16 +24,38 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
         data={barChartData}
         options={{
           maintainAspectRatio: false,
+          aspectRatio: 2,
           scales: {
             y: {
               beginAtZero: true,
             },
             x: { // Ajoutez cette section pour configurer l'axe des abscisses
               ticks: {
+                callback: function(value, index, values) {
+                  const label = typeof value === 'string' ? value : this.getLabelForValue(value);
+                  return label.length > 10 ? label.substr(0, 10) + '...' : label;
+                },
                 font: {
                   size: 8, // Définissez la taille de la police souhaitée ici
                 },
               },
+              grid: {
+                display: false, // Supprime les lignes verticales du graphique
+              },
+            },
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  return tooltipItem.dataset.label; // Affiche le label complet dans le tooltip
+                }
+              }
+            }
+          },
+          elements: {
+            bar: {
+              borderRadius: 2.5, // Valeur du border radius souhaitée
             },
           },
         }}
