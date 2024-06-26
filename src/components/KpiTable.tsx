@@ -13,12 +13,12 @@ interface KpiTableProps {
 const KpiTable = ({ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow }: KpiTableProps) => (
   <Box maxW="100%" overflowX="auto">
     <TableContainer>
-      <Table {...getTableProps()} variant="simple">
-        <Thead>
+      <Table {...getTableProps()} variant="striped" colorScheme="gray">
+        <Thead borderBottom="2px solid" borderColor="black">
           {headerGroups.map((headerGroup, index) => (
             <Tr {...headerGroup.getHeaderGroupProps()} key={`${headerGroup.id}-${index}`}>
               {headerGroup.headers.map((column) => (
-                <Th {...column.getHeaderProps()} key={column.id}>
+                <Th {...column.getHeaderProps()} key={column.id} fontSize="sm">
                   {column.render("Header")}
                 </Th>
               ))}
@@ -31,7 +31,7 @@ const KpiTable = ({ getTableProps, getTableBodyProps, headerGroups, rows, prepar
             return (
               <Tr {...row.getRowProps()} key={row.id}>
                 {row.cells.map((cell) => (
-                  <Td {...cell.getCellProps()} key={cell.column.id}>
+                  <Td {...cell.getCellProps()} key={cell.column.id} fontSize="sm">
                     {cell.render("Cell")}
                   </Td>
                 ))}

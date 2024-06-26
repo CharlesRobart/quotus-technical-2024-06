@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+import { Button, ButtonGroup, Flex } from '@chakra-ui/react';
 import NoSSR from 'react-no-ssr';
 import Select from 'react-select';
 import type { Option } from "@/typescript/interfaces";
@@ -19,17 +19,20 @@ const KpiGroupByFormatSelector: React.FC<KpiGroupByFormatSelectorProps> = ({
   const options = getReactSelectOptionsFromGroupedKpis(groupedByFormat);
 
   return (
-    <ButtonGroup display="flex" justifyContent="center">
-      {options.map((option) => (
-        <Button
-          key={option.value}
-          onClick={() => setSelectedKpiFormatGroup(option)}
-          colorScheme={selectedKpiFormatGroup?.value === option.value ? 'blue' : 'gray'}
-        >
-          {option.label}
-        </Button>
-      ))}
-    </ButtonGroup>
+    <Flex justifyContent="end" alignItems="center" w="100%" mb={2}>
+      <ButtonGroup flex="1" justifyContent="flex-end">
+        {options.map((option) => (
+          <Button
+            key={option.value}
+            onClick={() => setSelectedKpiFormatGroup(option)}
+            colorScheme={selectedKpiFormatGroup?.value === option.value ? 'blue' : 'gray'}
+            size="sm"
+          >
+            {option.label}
+          </Button>
+        ))}
+      </ButtonGroup>
+    </Flex>
     
   );
 };

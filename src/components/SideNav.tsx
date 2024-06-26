@@ -8,16 +8,23 @@ interface SideNavProps {
   sidenavTransition: string;
 }
 
+const linkStyles = {
+  _hover: {
+    fontWeight: "bold",
+    transform: "scale(1.05)", // Agrandir légèrement au survol
+  },
+};
+
 const SideNav = ({ isOpen, onToggle, sidenavWidth, sidenavTransition }: SideNavProps) => (
   <Box width={sidenavWidth} minW={sidenavWidth} transition={sidenavTransition} overflow="hidden">
     <Box p="4" bg="gray.100" height="100%">
-      <Heading size="md" mb="4">
+      <Heading size="lg" mb="4">
         Menu
       </Heading>
       <VStack align="start">
-        <Link href="/">Dashboard</Link>
-        <Link href="/">Profil</Link>
-        <Link href="/">Settings</Link>
+        <Link href="/" {...linkStyles}>Dashboard</Link>
+        <Link href="/" {...linkStyles}>Profil</Link>
+        <Link href="/" {...linkStyles}>Settings</Link>
       </VStack>
     </Box>
   </Box>

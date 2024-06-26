@@ -29,9 +29,10 @@ const KpiGroupByFormatAndFirstWordSelector: React.FC<KpiGroupByFormatAndFirstWor
         styles={{
           control: (base) => ({
             ...base,
-            backgroundColor: 'lightgrey',
+            width: 'auto',
+            backgroundColor: 'white',
             fontSize: '16px',
-            borderColor: 'blue',
+            borderColor: '#091646',
             hover: {
               borderColor: 'darkblue',
             },
@@ -41,6 +42,10 @@ const KpiGroupByFormatAndFirstWordSelector: React.FC<KpiGroupByFormatAndFirstWor
             backgroundColor: state.isSelected ? 'blue' : 'white',
             color: state.isSelected ? 'white' : 'black',
             padding: 20,
+          }),
+          placeholder: (base) => ({
+            ...base,
+            fontSize: '10px', // Ajustez la taille du placeholder ici
           }),
         }}
       />

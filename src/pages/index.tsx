@@ -115,7 +115,7 @@ const Home = () => {
   });
 
   const sidenavWidth = isOpen ? "250px" : "0";
-  const sidenavTransition = "width 0.3s";
+  const sidenavTransition = "width 0.4s";
 
   return (
     <Box display="flex" height="100vh">

@@ -42,7 +42,7 @@ const KpiSelector = ({ kpis, selectedKpis, setSelectedKpis }: KpiSelectorProps) 
   };
 
   return (
-    <Box>
+    <Box display="flex" justifyContent="end" mb={1}>
       <IconButton
         icon={<FaFilter />}
         aria-label="Filter KPIs"
