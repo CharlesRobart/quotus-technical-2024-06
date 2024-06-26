@@ -11,14 +11,33 @@ interface KpiBarChartProps {
 const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarChartProps) => {
   
   const [chartKey, setChartKey] = useState(0);
+  const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Ceci force le re-rendu du graphique en changeant sa clé lorsque la sidenav change
     setChartKey(prevKey => prevKey + 1);
   }, [sidenavWidth, sidenavTransition]);
 
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      setChartKey(prevKey => prevKey + 1);
+    });
+  
+    const currentChartContainerRef = chartContainerRef.current;
+  
+    if (currentChartContainerRef) {
+      resizeObserver.observe(currentChartContainerRef);
+    }
+  
+    return () => {
+      if (currentChartContainerRef) {
+        resizeObserver.unobserve(currentChartContainerRef);
+      }
+    };
+  }, []);
+
   return (
-    <Box  display="flex" w="100%" h="300px">
+    <Box  display="flex" w="100%" maxW="100%" h={{ base: "200px", md: "300px" }} overflow="hidden">
       <Bar
         key={chartKey}
         data={barChartData}

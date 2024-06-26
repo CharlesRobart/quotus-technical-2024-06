@@ -13,7 +13,7 @@ interface KpiTableProps {
 const KpiTable = ({ getTableProps, getTableBodyProps, headerGroups, rows, prepareRow }: KpiTableProps) => (
   <Box maxW="100%" overflowX="auto">
     <TableContainer>
-      <Table {...getTableProps()}>
+      <Table {...getTableProps()} variant="simple">
         <Thead>
           {headerGroups.map((headerGroup, index) => (
             <Tr {...headerGroup.getHeaderGroupProps()} key={`${headerGroup.id}-${index}`}>

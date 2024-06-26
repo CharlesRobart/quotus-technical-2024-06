@@ -24,21 +24,35 @@ const MainContent = ({
 
   return (
     <Box>
-      <Flex alignItems="center" h="70px" p={2}>
-        <HStack >
+      <Flex 
+        alignItems={{ base: "center", md: "center" }}
+        justifyContent={{ base: "center", md: "space-between" }}
+        direction={{ base: "column", md: "row" }}
+        flexWrap="wrap" 
+        h="auto" 
+        p={2} 
+        w="100%"
+        >
+        <HStack 
+          w={{ base: "100%", md: "auto" }}
+          justifyContent={{ base: "space-between", md: "flex-start" }}
+          alignItems="center"
+          >
           <IconButton
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             onClick={onToggle}
             aria-label="Toggle Sidebar"
           />
-          <Heading w="400px">Quotus Technical</Heading>
+          <Heading w={{ base: "100%", md: "400px" }} textAlign={{ base: "center", md: "left" }}>Quotus Technical</Heading>
         </HStack>
-        <DealershipSelector
-            dealerships={dealerships}
-            selectedDealerships={selectedDealerships}
-            setSelectedDealerships={setSelectedDealerships}
-          />
+        <Flex flex="1" justifyContent="center">
+          <DealershipSelector
+              dealerships={dealerships}
+              selectedDealerships={selectedDealerships}
+              setSelectedDealerships={setSelectedDealerships}
+            />
         </Flex>
+      </Flex>
       {children}
     </Box>
   );
