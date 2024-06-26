@@ -11,7 +11,7 @@ interface SideNavProps {
 const linkStyles = {
   _hover: {
     fontWeight: "bold",
-    transform: "scale(1.05)", // Agrandir légèrement au survol
+    transform: "scale(1.05)", 
   },
 };
 

@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
 import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Checkbox,
-  CheckboxGroup,
-  Stack,
   IconButton,
   useDisclosure,
   Box
 } from '@chakra-ui/react';
 import { FaFilter } from 'react-icons/fa';
 import type { Option } from "@/typescript/interfaces";
+import KpiModal from './kpimodaltable';
 
 interface KpiSelectorProps {
   kpis: Option[];
@@ -49,34 +39,14 @@ const KpiSelector = ({ kpis, selectedKpis, setSelectedKpis }: KpiSelectorProps) 
         onClick={onOpen}
         variant="outline"
       />
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Select KPIs</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <CheckboxGroup>
-              <Stack>
-                {kpis.map((option) => (
-                  <Checkbox
-                    key={option.value}
-                    isChecked={tempSelectedKpis.some(selected => selected.value === option.value)}
-                    onChange={() => handleToggleOption(option)}
-                  >
-                    {option.label}
-                  </Checkbox>
-                ))}
-              </Stack>
-            </CheckboxGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleSave}>
-              Save
-            </Button>
-            <Button variant="ghost" onClick={onClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <KpiModal
+        isOpen={isOpen}
+        onClose={onClose}
+        kpis={kpis}
+        tempSelectedKpis={tempSelectedKpis}
+        handleToggleOption={handleToggleOption}
+        handleSave={handleSave}
+      />
     </Box>
   );
 };

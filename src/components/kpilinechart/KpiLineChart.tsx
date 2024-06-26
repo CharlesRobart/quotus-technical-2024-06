@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { Line } from "react-chartjs-2";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface KpiLineChartProps {
   lineChartData: any;
@@ -12,7 +12,7 @@ const KpiLineChart = ({ lineChartData, sidenavWidth, sidenavTransition }: KpiLin
   const [chartKey, setChartKey] = useState(0);
 
   useEffect(() => {
-    // Ceci force le re-rendu du graphique en changeant sa clé lorsque la sidenav change
+    // This forces the chart to re-render by changing its key when the sidenav changes.
     setChartKey(prevKey => prevKey + 1);
   }, [sidenavWidth, sidenavTransition]);
 
@@ -32,7 +32,7 @@ const KpiLineChart = ({ lineChartData, sidenavWidth, sidenavTransition }: KpiLin
             legend: {
               labels: {
                 font: {
-                  size: 8, // Taille de la police de la légende
+                  size: 8,
                 },
               },
             },

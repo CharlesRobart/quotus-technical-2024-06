@@ -35,9 +35,15 @@ const AlertMessage: React.FC<AlertMessageProps> = ({ showAlert, maxWidth, onHide
     }
 
   return (
-    <Flex position="absolute" top="4" right="4">
-      <Alert status="warning" maxWidth={maxWidth} borderRadius="md">
-        <AlertIcon />
+    <Flex position="absolute" top="4" right="4" >
+      <Alert 
+        status="warning"
+        maxWidth={maxWidth} 
+        borderRadius="10px"
+        backgroundColor="white"
+        border="1px solid #091646"
+        >
+        <AlertIcon color="orange"/>
         You can select up to 3 dealerships.
       </Alert>
     </Flex>

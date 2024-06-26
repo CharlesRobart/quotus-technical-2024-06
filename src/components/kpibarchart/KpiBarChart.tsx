@@ -14,10 +14,11 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Ceci force le re-rendu du graphique en changeant sa clé lorsque la sidenav change
+    // This forces the graph to re-render by changing its key when the sidenav changes.
     setChartKey(prevKey => prevKey + 1);
   }, [sidenavWidth, sidenavTransition]);
 
+  // This useEffect sets up a ResizeObserver on the chart container to trigger a re-render of the chart when its size changes.
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       setChartKey(prevKey => prevKey + 1);
@@ -35,6 +36,7 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
       }
     };
   }, []);
+  
 
   return (
     <Box  display="flex" w="100%" maxW="100%" h={{ base: "200px", md: "300px" }} overflow="hidden">
@@ -48,18 +50,18 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
             y: {
               beginAtZero: true,
             },
-            x: { // Ajoutez cette section pour configurer l'axe des abscisses
+            x: { 
               ticks: {
                 callback: function(value, index, values) {
-                  const label = typeof value === 'string' ? value : this.getLabelForValue(value);
+                  const label = typeof value === "string" ? value : this.getLabelForValue(value);
                   return label.length > 10 ? label.substr(0, 10) + '...' : label;
                 },
                 font: {
-                  size: 8, // Définissez la taille de la police souhaitée ici
+                  size: 8,
                 },
               },
               grid: {
-                display: false, // Supprime les lignes verticales du graphique
+                display: false,
               },
             },
           },
@@ -67,14 +69,14 @@ const KpiBarChart = ({ barChartData, sidenavWidth, sidenavTransition }: KpiBarCh
             tooltip: {
               callbacks: {
                 label: function(tooltipItem) {
-                  return tooltipItem.dataset.label; // Affiche le label complet dans le tooltip
+                  return tooltipItem.dataset.label; 
                 }
               }
             }
           },
           elements: {
             bar: {
-              borderRadius: 2.5, // Valeur du border radius souhaitée
+              borderRadius: 2.5,
             },
           },
         }}

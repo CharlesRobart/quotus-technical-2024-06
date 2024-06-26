@@ -14,27 +14,33 @@ interface DealershipSelectorProps {
 const DealershipSelector = ({ dealerships, selectedDealerships, setSelectedDealerships }: DealershipSelectorProps) => {
 
   const maxWidth = useBreakpointValue({ base: "300px", md: "500px" });
+  const fontSize = useBreakpointValue({ base: "12px", md: "16px" });
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSelectedDealershipsChange = (
     newValue: MultiValue<Option>,
     actionMeta: ActionMeta<Option>
   ) => {
-    // Ensure newValue is an array of Option
     const selectedOptions = newValue as Option[];
     
     // Limit selection to 3 options
     if (selectedOptions.length <= 3) {
       setSelectedDealerships(selectedOptions);
-      setShowAlert(false); // Hide alert if selections are valid
+      setShowAlert(false); 
     } else {
-      // Show alert if more than 3 selections are attempted
       setShowAlert(true);
     }
   };
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" w="auto" p="10px">
+    <Box 
+      display="flex" 
+      justifyContent="center" 
+      alignItems="center" 
+      w="auto" 
+      maxWidth="100%" 
+      p="10px"
+      >
       <NoSSR>
         <Select
           isMulti
@@ -51,8 +57,7 @@ const DealershipSelector = ({ dealerships, selectedDealerships, setSelectedDeale
               borderColor: '#E2E2E2',
               borderRadius: '10px',
               transition: 'transform 0.3s ease',
-              width: '100%', 
-              maxWidth: maxWidth,
+              width: selectedDealerships.length > 1 ? '100%' : maxWidth, 
               '&:hover': {
                 transform: 'scale(1.05)',
               },
@@ -61,6 +66,18 @@ const DealershipSelector = ({ dealerships, selectedDealerships, setSelectedDeale
               ...provided,
               width: '100%',
               maxWidth: maxWidth,
+            }),
+            multiValue: (provided) => ({
+              ...provided,
+              fontSize: fontSize, // Apply font size based on screen size
+            }),
+            singleValue: (provided) => ({
+              ...provided,
+              fontSize: fontSize, // Apply font size based on screen size
+            }),
+            placeholder: (provided) => ({
+              ...provided,
+              fontSize: fontSize, // Apply font size based on screen size
             }),
           }}
         />

@@ -2,6 +2,9 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  color : #091646;
   font-family: "Figtree", sans-serif;
+}
+
+body, p, h1, h2, h3, h4, h5, h6, span, a, li, label, input, button {
+  color: #091646;
 }

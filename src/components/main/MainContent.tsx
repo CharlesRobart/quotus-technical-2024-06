@@ -1,6 +1,5 @@
 import { Box, Flex, HStack, Heading, IconButton, Text } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import { useDisclosure } from "@chakra-ui/react";
 import type { Option } from "@/typescript/interfaces";
 import DealershipSelector from "./DealershipSelector";
 

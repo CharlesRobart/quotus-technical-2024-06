@@ -1,17 +1,15 @@
 import React from 'react';
-import { Button, ButtonGroup, Flex } from '@chakra-ui/react';
-import NoSSR from 'react-no-ssr';
-import Select from 'react-select';
+import { Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import type { Option } from "@/typescript/interfaces";
 import { getReactSelectOptionsFromGroupedKpis } from "@utils/helper";
 
-interface KpiGroupByFormatSelectorProps {
+interface GroupByFormatSelectorProps {
   groupedByFormat: Record<string, any>;
   selectedKpiFormatGroup: Option | undefined;
   setSelectedKpiFormatGroup: (option: Option) => void;
 }
 
-const KpiGroupByFormatSelector: React.FC<KpiGroupByFormatSelectorProps> = ({
+const GroupByFormatSelector: React.FC<GroupByFormatSelectorProps> = ({
   groupedByFormat,
   selectedKpiFormatGroup,
   setSelectedKpiFormatGroup,
@@ -37,4 +35,4 @@ const KpiGroupByFormatSelector: React.FC<KpiGroupByFormatSelectorProps> = ({
   );
 };
 
-export default KpiGroupByFormatSelector;
+export default GroupByFormatSelector;
