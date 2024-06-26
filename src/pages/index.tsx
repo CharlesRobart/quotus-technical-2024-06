@@ -129,11 +129,12 @@ const Home = () => {
       />
 
       {/* Main Content */}
-      <Box flex="1" p="4">
+      <Box flex="1" p="4" >
         <MainContent isOpen={isOpen} onToggle={onToggle}>
 
         {/* Dealership Selector */}
 
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" w="100%" h="100%" backgroundColor="#F9F9F9" boxShadow="inset 0 0 10px #E2E2E2">
           <DealershipSelector
             dealerships={getReactSelectOptionsFromDealerships(dealerships)}
             selectedDealerships={selectedDealerships}
@@ -197,6 +198,7 @@ const Home = () => {
 
             </>
           )}
+          </Box>
         </MainContent>
       </Box>
     </Box>

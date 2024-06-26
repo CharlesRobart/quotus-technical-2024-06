@@ -26,6 +26,23 @@ const KpiGroupByFormatAndFirstWordSelector: React.FC<KpiGroupByFormatAndFirstWor
         placeholder="Select Kpi By Format And First Word Group "
         value={selectedKpiFormatAndFirstWordGroup}
         id="kpi-by-format-and-first-word-group"
+        styles={{
+          control: (base) => ({
+            ...base,
+            backgroundColor: 'lightgrey',
+            fontSize: '16px',
+            borderColor: 'blue',
+            hover: {
+              borderColor: 'darkblue',
+            },
+          }),
+          option: (base, state) => ({
+            ...base,
+            backgroundColor: state.isSelected ? 'blue' : 'white',
+            color: state.isSelected ? 'white' : 'black',
+            padding: 20,
+          }),
+        }}
       />
     </NoSSR>
   );
